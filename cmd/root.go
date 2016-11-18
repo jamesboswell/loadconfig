@@ -68,25 +68,11 @@ func Execute() {
 
 func init() {
 	cobra.OnInitialize(initConfig)
-
-	// Here you will define your flags and configuration settings.
-	// Cobra supports Persistent Flags, which, if defined here,
-	// will be global for your application.
-
-	// RootCmd.PersistentFlags().StringVar(&cfgFile, "config", "", "config file (default is $HOME/.loadconfig.yaml)")
-	// RootCmd.Flags().StringVar(&router, "router", "", "router name")
+	// Flags
 	RootCmd.PersistentFlags().StringVarP(&router, "router", "r", "", "Router hostname or IP address")
 	RootCmd.PersistentFlags().StringVarP(&configFile, "config", "c", "", "junos configuration commands file")
-
-	// Cobra also supports local flags, which will only run
-	// when this action is called directly.
-	// RootCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
+	// Debug flag
 	RootCmd.PersistentFlags().BoolVarP(&Config.debug, "debug", "d", false, "Enable debugging")
-
-	// if err != nil {
-	// 	fmt.Printf("ERROR:: %s\n\n", err)
-	// 	RootCmd.Help()
-	// }
 
 }
 
@@ -111,31 +97,15 @@ func initConfig() {
 	Config.router = router
 	Config.file = configFile
 
-	// if cfgFile != "" { // enable ability to specify config file via flag
-	// 	viper.SetConfigFile(cfgFile)
-	// }
-	//
-	// viper.SetConfigName(".loadconfig") // name of config file (without extension)
-	// viper.AddConfigPath("$HOME")       // adding home directory as first search path
-	// viper.AutomaticEnv()               // read in environment variables that match
-	//
-	// // If a config file is found, read it in.
-	// if err := viper.ReadInConfig(); err == nil {
-	// 	fmt.Println("Using config file:", viper.ConfigFileUsed())
-	// }
 }
 
 func checkFlags() error {
 	err := ""
 	if RootCmd.Flag("router").Changed != true {
-		// logrus.Errorf("%s", "Router not specified")
 		err = "Router not specified"
-		// return errors.New(err)
 	}
 	if RootCmd.Flag("config").Changed != true {
-		// logrus.Errorf("%s", "Configuration commands file not specified")
 		err = "Configuration file not specified"
-		// return errors.New(err)
 	}
 	if err != "" {
 		return errors.New(err)

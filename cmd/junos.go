@@ -24,9 +24,7 @@ var junosCmd = &cobra.Command{
 	Long:  `Loads Juniper Junos configuration from --config file`,
 	// Hidden: true,
 	Run: func(cmd *cobra.Command, args []string) {
-		// TODO: Work your own magic here
-		// fmt.Println("junos called")
-
+		// start the NETCONF session
 		openSession()
 	},
 }
@@ -231,6 +229,7 @@ func readConfig(file string) (string, error) {
 	return string(f), err
 }
 
+// Credit albrow : https://gist.github.com/albrow/5882501
 // askForConfirmation uses Scanln to parse user input. A user must type in "yes" or "no" and
 // then press enter. It has fuzzy matching, so "y", "Y", "yes", "YES", and "Yes" all count as
 // confirmations. If the input is not recognized, it will ask again. The function does not return
