@@ -20,7 +20,7 @@
 
 package main
 
-import "loadconfig/cmd"
+import "github.com/jamesboswell/loadconfig/cmd"
 
 func main() {
 	cmd.Execute()
