@@ -22,12 +22,6 @@ package main
 
 import "loadconfig/cmd"
 
-// ProgramName -
-var ProgramName = "loadconfig"
-
-// Version -
-var Version = "1.0"
-
 func main() {
 	cmd.Execute()
 }
