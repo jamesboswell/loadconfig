@@ -193,7 +193,7 @@ Gathering system facts ...
 			s.Unlock()
 			os.Exit(1)
 		} else {
-			fmt.Println("Final commit is SUCCESSFUL!")
+			g.Println("Final commit is SUCCESSFUL!")
 		}
 
 	} else {
@@ -204,13 +204,8 @@ Gathering system facts ...
 	}
 
 	hr()
-	y.Println("Config changes rolled back, closing connection")
-	// if err = s.Unlock(); err != nil {
-	// 	l.Error("Unlock failed")
-	// }
-	y.Println("Configuration Unlocked")
-	hr()
-	g.Println("Goodbye!")
+	y.Println("Config changes commited, config unlocked")
+	g.Println("Closing connection, Goodbye!")
 	hr()
 	s.Close()
 	fmt.Println("Connection closed to: ", Config.router)
