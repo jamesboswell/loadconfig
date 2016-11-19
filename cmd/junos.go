@@ -126,7 +126,7 @@ func openSession() {
 	}
 
 	fmt.Printf("Config diff (show | compare)::\n")
-	delta, err := s.ConfigDelta()
+	delta, err := s.Diff(0)
 	if err != nil {
 		l.Error("no difference in config?")
 	}
