@@ -60,7 +60,7 @@ func openSession() {
 	c.Printf("%s\n", "Starting session....")
 	y.Printf("\t     router:  %-6s\n", Config.router)
 	y.Printf("\tconfig file:  %-6s\n", Config.file)
-	hr()
+	fmt.Printf("\n\n")
 
 	// Prompt for credentials
 	if user == "" {
@@ -81,14 +81,10 @@ func openSession() {
 		l.Errorf("NETCONF session error : %s", err)
 	}
 
-	gather := `
-------------------------
-Gathering system facts ...
-------------------------`
-
-	c.Println(gather)
+	c.Println("Gathering system facts ...")
+	hr()
+	// Print system info
 	fmt.Printf("HOSTNAME :\t%-10s\n", s.Hostname)
-
 	for _, p := range s.Platform {
 		fmt.Printf("   MODEL :\t%-10s\n", p.Model)
 		fmt.Printf("   JUNOS :\t%-10s\n", p.Version)
@@ -129,7 +125,7 @@ Gathering system facts ...
 		fmt.Println("candidate config is OK!")
 	}
 
-	fmt.Printf("Config diff::\n")
+	fmt.Printf("Config diff (show | compare)::\n")
 	delta, err := s.ConfigDelta()
 	if err != nil {
 		l.Error("no difference in config?")
